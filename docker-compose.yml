@@ -1,0 +1,37 @@
+version: "3.2"
+services:
+  db:
+    image: postgres:9.4
+    restart: always
+    container_name: DB_A
+    ports:
+      - "5432:5432"
+    networks:
+      - postgresql
+    environment:
+      POSTGRES_PASSWORD: "bar123"
+      POSTGRES_DB: "foo"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    restart: always
+    container_name:  pgadmin4_B
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "mascotas@mascotas.com"
+      PGADMIN_DEFAULT_PASSWORD: "bar123"
+    ports:
+      - "80:80"
+    links:
+      - db
+    networks:
+      - postgresql
+    depends_on:
+      - db
+
+
+
+networks:
+  postgresql:
+    driver: bridge
