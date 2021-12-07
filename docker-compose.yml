@@ -13,6 +13,7 @@ services:
       POSTGRES_DB: "foo"
     volumes:
       - ./data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   pgadmin4:
     image: dpage/pgadmin4
@@ -30,8 +31,27 @@ services:
     depends_on:
       - db
 
+  scraper:
+    build: ./scraper
+    restart: on-failure:5
+    container_name: scraper_C
+    networks:
+      - postgresql
+    volumes:
+      - type: bind
+        source: ./scraper
+        target: /usr/src/app
+    depends_on:
+      - db
+    env_file:
+      - ./scraper/env.list
+    command: python ./scraper.py
+
+
+
 
 
 networks:
   postgresql:
     driver: bridge
+  
