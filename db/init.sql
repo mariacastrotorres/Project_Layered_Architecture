@@ -8,7 +8,8 @@ CREATE TABLE persona  (
 
 CREATE TABLE mascota  (
 	id SERIAL NOT NULL,
-    id_persona INTEGER (),
+    id_persona INTEGER,
 	nombre VARCHAR(50),
+    imagen VARCHAR(500),
     PRIMARY KEY (id)
 );
