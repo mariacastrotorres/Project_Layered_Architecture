@@ -47,6 +47,24 @@ services:
       - ./scraper/env.list
     command: python ./scraper.py
 
+  api:
+    build: ./api
+    restart: on-failure:5
+    container_name: api_D
+    ports:
+      - "5000:5000"
+    networks:
+      - postgresql
+    volumes:
+      - type: bind
+        source: ./api
+        target: /usr/src/app
+    depends_on:
+      - db
+    env_file:
+      - ./scraper/env.list
+    command: python ./main.py
+
 
 
 
