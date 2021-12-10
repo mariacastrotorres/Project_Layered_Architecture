@@ -51,7 +51,7 @@ try:
         persona.append(temp2)
         mascota.append(temp)
         print(persona)
-        return jsonify(items = [persona])
+        return jsonify(items = [mascota])
 
     @app.route('/add-persona', methods=['GET', 'POST'])
     def add_persona():
