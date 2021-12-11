@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
 
-HOST = os.getenv('DB_HOST')
+HOST = os.getenv('DB_HOST0')
 PORT = os.getenv('DB_PORT')
 NAME = os.getenv('DB_NAME')
 USER = os.getenv('DB_USER')
@@ -107,6 +107,6 @@ except:
 
 
 if __name__ == '__main__':
-    app.run(host= "0.0.0.0", port=5000)
+    app.run(host= "0.0.0.0", port=5000, debug=True)
 
 

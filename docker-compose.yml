@@ -62,8 +62,16 @@ services:
     depends_on:
       - db
     env_file:
-      - ./scraper/env.list
+      - ./api/env.list
     command: python ./main.py
+
+  web:
+    build: ./app
+    command: npm start
+    volumes:
+      - ./app:/app
+    ports:
+      - "3000:3000"
 
 
 
